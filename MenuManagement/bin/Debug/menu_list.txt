@@ -1,0 +1,76 @@
+3
+Breakfasts
+2
+breakfasts
+bf
+3
+2
+meeting_breakfast
+mb
+Meeting Breakfast
+Selection of freshly handmade croissants, danish, Honey, Greek yoghurt and granola
+6.0
+2
+sausage_bacon
+sb
+Sausage & Bacon Sandwich
+2 bacon, 2 Sausage 
+2.95
+2
+cumberland_sausage
+cs
+Cumberland Sausage Sandwich
+1 bacon, 2 Sausage, 1 Egg, 1 White Bread
+4.5
+Meetings and Events
+2
+meeting_and_events
+mne
+4
+2
+meeting_platter
+mp
+Meeting Platter
+One round of freshly prepared mixed sandwiches
+6.5
+2
+executive_platter
+ep
+Executive Platter
+Sticky honey & lemon glazed chicken skewers with toasted sesame seeds
+7.5
+2
+premium_platter
+pp
+Premium Platter
+One round of freshly prepared mixed sandwiches and wraps, Bite-size smoked salmon and cream cheese bagels
+9.0
+2
+signature platter
+sp
+Signature Platter
+Homemade three cheese tartlets, Bite-size smoked salmon and cream cheese bagel
+7.0
+Ready To Go
+2
+ready_to_go
+rtg
+3
+2
+double_bacon_lettuce_and_tomato
+dblat
+Double Bacon, Lettuce and Tomato
+Smoked Streaky Bacon, Sliced Tomatoes, Chopped Romaine Lettuce
+3.5
+2
+free_range_double_egg
+frde
+Free Range Double Egg
+Egg Mayonnaise, Sliced Hard Boiled Egg, Sliced Tomatoes
+3.0
+2
+beef_and_tewkesbury_mustard
+batm
+Beef and Tewkesbury Mustard
+Barbers Mature Cheddar Cheese, Sandwich Pickle, Sliced Tomatoes
+3.5
