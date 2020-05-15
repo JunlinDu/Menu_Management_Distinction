@@ -10,7 +10,7 @@ using MenuManagement;
 namespace MenuSystem
 {
     public class Management
-    {
+    {/*
         private List<Menu> _menus;
         //use for store user input (temporary),[o] strore id, [1] store name
         //private string[] _tempInfo = new string [2];
@@ -150,6 +150,6 @@ namespace MenuSystem
 
             }
 
-        }
+        }*/
     }
 }

@@ -1,15 +1,17 @@
-﻿using System;
+﻿using MenuProject;
+using System;
 using System.Collections.Generic;
+using System.IO;
 namespace MenuManagement
 {
     public abstract class IdentifiableEntities
     {
-        private List<String> _identifiers;
+        private List<String> identifiers;
         private String _name;
         public IdentifiableEntities(String[] Identifiers, String name)
         {
-            _name = nameLength(name);
-            _identifiers = new List<String>();
+            name = nameLength(name);
+            identifiers = new List<String>();
 
             foreach (String s in Identifiers)
             {
@@ -19,7 +21,7 @@ namespace MenuManagement
 
         public bool identifyObject(String id)
         {
-            if (_identifiers.IndexOf(id.ToLower()) != -1)
+            if (identifiers.IndexOf(id.ToLower()) != -1)
                 return true;
             else
                 return false;
@@ -33,19 +35,17 @@ namespace MenuManagement
                 return null;
         }
 
-        public abstract void Save();
-
-        public abstract void Load();
+        public String[] Identifiers{get;set;}
 
         public String Name
-        {
-            get { return _name; }
-            set { _name = value; }
+        { 
+            get { return _name; } 
+            set { _name = value; } 
         }
 
         private void AddIdentifier(String Id)
         {
-            _identifiers.Add(Id.ToLower());
+            identifiers.Add(Id.ToLower());
         }
 
         private String nameLength(String s)

@@ -1,30 +1,29 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace MenuManagement
 {
-    public class Authentication
+    public static class Authentication
     {
-        private string _role;
-
-        public Authentication()
+        public static Dictionary<String, String> KeyAndVlauePairs= new Dictionary<String, String>();
+        public static void RegisterAuthentication(String userName, String passWord)
         {
+            KeyAndVlauePairs[userName] = passWord;
         }
 
-        public void Identify()
+        public static AuthenticationResult Identify(String userName, String password)
         {
-            Console.WriteLine("Hi mate.\nIf you are management, please press 1 \nIf you are customer, please press 2");
-            _role = Console.ReadLine();
-            if (_role == "1")
+            foreach(String key in KeyAndVlauePairs.Keys)
             {
-                Console.WriteLine("You have the authority to modify the menu.");
+                if(userName == key)
+                {
+                    if (KeyAndVlauePairs[userName].Equals(password))
+                        return AuthenticationResult.nameNPasswordCorrect;
+                    else
+                        return AuthenticationResult.passwordIncorrect;
+                }
             }
-            else if (_role == "2")
-            {
-                Console.WriteLine("Here is our menu, you can browse it and order via this machine, feel free to call us if you have any questions");
-            }
-            else
-            {
-                Console.WriteLine("Please press 1 or 2");
-            }
+            return AuthenticationResult.userNameIncorrect;
         }
     }
 }

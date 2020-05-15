@@ -1,101 +1,136 @@
 ﻿using System;
 using System.IO;
 using System.Collections.Generic;
+using MenuProject;
+
 namespace MenuManagement
 {
-    public class OrderPanel:IdentifiableEntities
+    public class OrderPanel
     {
         private List<Menu> _menuList;
         private List<Dish> _orderList;
-        private double totalPrice;
-        private StreamWriter _orderHistory;
-        public OrderPanel():base
-            (new String[] {"op", "order panel" }, "Order Panel")
+        private double _dailySaleTotal;
+        private int _guestCount;
+        public OrderPanel()
         {
             _menuList = new List<Menu>();
             _orderList = new List<Dish>();
-            _orderHistory = new StreamWriter("Orderhistory.txt");
+            _dailySaleTotal = 0.0;
         }
 
-
-        /// <summary>
-        /// this method should be able to load information from a
-        /// text file, adding different menu to the menu list.
-        /// </summary>
-        public override void Load()
+        public List<Dish> OrderList
         {
-
+            get { return _orderList; }
         }
-
-        public override void Save()
+        private void SaveOrder()
         {
-            _orderHistory.WriteLine("Order is :");
-            foreach (Dish d in _orderList)
+            StreamWriter writer = new StreamWriter("order_histroy.txt");
+            writer.WriteLine("Guest Number: " + _guestCount);
+            foreach (Dish dish in _orderList)
             {
-                _orderHistory.WriteLine(d.Name + "  Price:" + d.Price);
+                writer.WriteLine(dish.Name);
             }
-            _orderHistory.WriteLine("Total price is: " + totalPrice + "\n\n");
+            writer.WriteLine("Total: " + calculatePrice());
+            writer.WriteLine("Daily Total: " + _dailySaleTotal);
         }
 
-        public override void Locate()
+        public void Load(String fileName)
         {
-            ///
-        }
-
-        /// <summary>
-        /// this method calculates the total price
-        /// </summary>
-        public void calculatePrice()
-        {
-            double totalPrice = 0;
-            foreach (Dish d in _orderList)
+            StreamReader reader = new StreamReader(fileName);
+            int menuCount = reader.ReadInteger();
+            try
             {
-                totalPrice += d.Price;
+                for(int i = 0; i < menuCount; i++)
+                {
+                    String name = reader.ReadLine();
+                    _menuList.Add(new Menu(ReadId(reader), name));
+                    int dishCount = reader.ReadInteger();
+                    for(int idx = 0; idx < dishCount; idx++)
+                    {
+                        Dish dish = new Dish();
+                        String[] ids = ReadId(reader);
+                        _menuList[i].Dishes.Add(dish.Load(reader, ids));
+                    }
+                }
             }
-            Console.WriteLine("The bill comes to: " + totalPrice + "$.");
-            clearOrderList();
+            finally
+            {
+                reader.Close();
+            }
         }
-        /// <summary>
-        /// this method shoule be able to be called for the customer to finalize their orders
-        /// </summary>
-        public void processOrder()
+
+        private String[] ReadId(StreamReader reader)
         {
-            displayOrder();
-            calculatePrice();
-            Save();
-            clearOrderList();
+            int idCount = reader.ReadInteger();
+            String[] ids = new string[idCount];
+            for (int i = 0; i < idCount; i++)
+            {
+                ids[i] = reader.ReadLine();
+            }
+            return ids;
         }
-        /// <summary>
-        /// this method  is called to display the order.
-        /// </summary>
+
+        public double calculatePrice()
+        {
+            double _price = 0.0;
+            foreach (Dish dish in _orderList)
+            {
+                _price += dish.Price;
+            }
+            return _price;
+        }
+
         public void displayOrder()
         {
-            Console.WriteLine("You have ordered:");
-            foreach (Dish d in _orderList)
+            Console.WriteLine("****The List Below Shows Dishes That You Have Ordered****");
+            for (int i = 0; i < _orderList.Count; i++)
             {
-                Console.WriteLine(d.Name + "  Price:" + d.Price + "\n" + d.Description);
+                Console.WriteLine((i+1).ToString() + ". " + _orderList[i].Name + " ······················  " + _orderList[i].Price);
+            }
+            Console.WriteLine("Total: " + calculatePrice().ToString());
+        }
+
+        public void displayMenu()
+        {
+            for (int i = 0; i < _menuList.Count; i++)
+            {
+                Console.WriteLine((i+1).ToString() + ". " + _menuList[i].Name);
             }
         }
-        /// <summary>
-        /// the orderList should be cleared after customers finish ordering
-        /// </summary>
-        private void clearOrderList()
+
+        public void FinalizeOrder()
         {
+            _dailySaleTotal += calculatePrice();
+            _guestCount += 1;
+            SaveOrder();
             _orderList.Clear();
-
         }
 
-        public void addDishToOrder(Dish aDish)
+        public Menu ChooseMenu(int choice)
         {
-            _orderList.Add(aDish);
-            displayOrder();
+            return _menuList[(choice - 1)];
         }
 
-        public void deleteDishFromOrder(Dish aDish)
+        public String addDishToOrder(Menu menu, int i)
         {
-            _orderList.Remove(aDish);
-            displayOrder();
+            if (i <= menu.Dishes.Count)
+            {
+                Dish dish = menu.Dishes[i - 1];
+                _orderList.Add(dish);
+                return dish.Name + " successfully added!";
+            }
+            return "*********Please Re-Enter*********";
         }
 
+        public String deleteDishFromOrder(int i)
+        {
+            if (i <= _orderList.Count)
+            {
+                Dish dish = _orderList[i - 1];
+                _orderList.RemoveAt(i - 1);
+                return dish.Name + " Deleted from Your Order List";
+            }
+            return "*********Please Re-Enter*********";
+        }
     }
 }

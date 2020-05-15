@@ -1,4 +1,6 @@
-﻿using System;
+﻿using MenuProject;
+using System;
+using System.IO;
 namespace MenuManagement
 {
     public class Dish:IdentifiableEntities
@@ -6,12 +8,8 @@ namespace MenuManagement
         private String _description;
         private double _price;
 
-        /// <summary>
-        /// constructor
-        /// </summary>
-        /// <param name="ids">the dish should be identified by its name and acronym
-        /// identifiers should be all lowercase letters!</param>
-        /// <param name="name">dish name, combination of lowercase and uppercase letters</param>
+        public Dish() : this(new string[] { "dish" }, "name", "desc", 1.2) { }
+
         public Dish
             (String[] ids, String name, String description, double price)
             :base(ids, name)
@@ -20,32 +18,18 @@ namespace MenuManagement
             _price = priceRange(price);
         }
 
-        /// <summary>
-        /// the method return type is not determined yet
-        /// it could return a string for other objects/classes to print out
-        /// or it could print out the string on its own
-        /// this method will display the discription of each dish.
-        /// not to be confused with _description, this method will show a full
-        /// description of the dish.
-        /// </summary>
-        public void displayFullDiscription()
+        public Dish Load(StreamReader reader, String[] ids)
         {
-
-        }
-
-        public override void Load()
-        {
-
-        }
-
-        public override void Save()
-        {
-
+            Identifiers = ids;
+            Name = reader.ReadLine();
+            Description = reader.ReadLine();
+            Price = reader.ReadSingle();
+            return this;
         }
 
         private double priceRange(double num)
         {
-            if (num < 150 && num > 0)
+            if (num < 150.0 && num > 0.0)
                 return num;
             return 0;
         }
