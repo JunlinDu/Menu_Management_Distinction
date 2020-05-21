@@ -81,19 +81,48 @@ namespace MenuManagement
                     Console.Write("\n \n \n");
                     while (!ipt.Equals("q"))
                     {
+                        int option;
                         String str;
                         do
                         {
-                            Menu menu = panel.ChooseMenu(Int32.Parse(ipt));
-                            menu.DisplayDish();
-                            Console.Write("Please Enter Your Choice (Press 'q' to Exit to the Previous Level) ->  ");
-                            str = Console.ReadLine();
-                            Console.Write("\n \n \n");
-                            if (!str.Equals("q"))
+                            if (int.TryParse(ipt, out option))
                             {
-                                str = panel.addDishToOrder(menu, Int32.Parse(str));
-                                Console.WriteLine(str);
-                                Console.Write("\n \n \n");
+                                Menu menu = panel.ChooseMenu(Int32.Parse(ipt));
+                                if (menu != null)
+                                {
+                                    menu.DisplayDish();
+                                    Console.Write("Please Enter Your Choice (Press 'q' to Exit to the Previous Level) ->  \n");
+                                    str = Console.ReadLine();
+                                    Console.Write("\n \n \n");
+                                    if (int.TryParse(str, out option))
+                                    {
+                                        str = panel.addDishToOrder(menu, Int32.Parse(str));
+                                        Console.WriteLine(str);
+                                        Console.Write("\n \n \n");
+                                        if (str != "*********Please Re-Enter*********")
+                                        {
+                                            break;
+                                        }
+                                    }
+                                    else if (str.Equals("q"))
+                                    {
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        Console.Write("*********Please Re-Enter*********\n\n");
+                                    }
+                                }
+                                else
+                                {
+                                    Console.Write("*********Please Re-Enter*********\n\n");
+                                    break;
+                                }
+                            }
+                            else
+                            {
+                                Console.Write("*********Please Re-Enter*********\n\n");
+                                break;
                             }
                         } while (!str.Equals("q"));
                         ipt = DisplayMenus(panel);
@@ -112,8 +141,7 @@ namespace MenuManagement
                     } while (!state.Equals(OrderingState.ExitToPreviousLevel));
                     return state;
                 default:
-                    Console.Write("\n \n \n");
-                    Console.Write("*Please Re-Enter Your Choice*");
+                    Console.Write("*Please Re-Enter Your Choice*\n");
                     return OrderingState.UnidentifiedInput;
             }
         }
@@ -171,6 +199,7 @@ namespace MenuManagement
                 }
                 else if (choice.Equals("q"))
                 {
+                    Console.Write("\n \n \n");
                     return OrderingState.ExitToPreviousLevel;
                 }
                 else

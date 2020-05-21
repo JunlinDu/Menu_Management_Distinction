@@ -108,16 +108,26 @@ namespace MenuManagement
 
         public Menu ChooseMenu(int choice)
         {
-            return _menuList[(choice - 1)];
+            if (choice > 0)
+            {
+                if (choice <= _menuList.Count)
+                {
+                    return _menuList[(choice - 1)];
+                }
+            }
+            return null;
         }
 
         public String addDishToOrder(Menu menu, int i)
         {
-            if (i <= menu.Dishes.Count)
+            if (i > 0)
             {
-                Dish dish = menu.Dishes[i - 1];
-                _orderList.Add(dish);
-                return dish.Name + " successfully added!";
+                if (i <= menu.Dishes.Count)
+                {
+                    Dish dish = menu.Dishes[i - 1];
+                    _orderList.Add(dish);
+                    return dish.Name + " successfully added!";
+                }
             }
             return "*********Please Re-Enter*********";
         }
