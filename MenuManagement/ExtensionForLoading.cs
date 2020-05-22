@@ -5,6 +5,9 @@ namespace MenuProject
 {
     public static class ExtensionForLoading
     {
+        //<summary>
+        // Some extension for loading to make sure everthing works as excepted.
+        // </summary>
         public static int ReadInteger(this StreamReader reader)
         {
             return Convert.ToInt32(reader.ReadLine());
