@@ -3,14 +3,8 @@ using System;
 using System.IO;
 namespace MenuManagement
 {
-    //<summary>
-    // Dish class are inherited from IdentifiableEntities.
-    // A dish stores its ID, name, price and descrption.
-    // Dishes can be loaded form a text file.
-    // </summary>
     public class Dish:IdentifiableEntities
     {
-
         private String _description;
         private double _price;
 
@@ -24,7 +18,6 @@ namespace MenuManagement
             _price = priceRange(price);
         }
 
-        // This function can load dishes from a text file.
         public Dish Load(StreamReader reader, String[] ids)
         {
             Identifiers = ids;
@@ -34,7 +27,6 @@ namespace MenuManagement
             return this;
         }
 
-        // This function can check if the price in within the price range.
         private double priceRange(double num)
         {
             if (num < 150.0 && num > 0.0)
@@ -42,14 +34,12 @@ namespace MenuManagement
             return 0;
         }
 
-        // Full description of the dish
         public String Description
         {
             get { return _description; }
             set { _description = value; }
         }
 
-        // Price of the dish
         public double Price
         {
             get { return _price; }

@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace MenuManagement
 {
-    //<summary>
-    // An enum stores all the states indicating the ordering state.
-    // </summary>
     public enum OrderingState
     {
         ViewingMenu,
