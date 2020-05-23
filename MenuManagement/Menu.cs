@@ -2,12 +2,6 @@
 using System.Collections.Generic;
 namespace MenuManagement
 {
-    //<summary>
-    // Menu class are inherited from IdentifiableEntities.
-    // A menu stores a list of dishes in it.
-    // Menu can be add and delect from here.
-    // Menu can be displayed.
-    // </summary>
     public class Menu : IdentifiableEntities
     {
         private List<Dish> _dishes;
@@ -22,19 +16,16 @@ namespace MenuManagement
             get { return _dishes; }
         }
 
-        //This function can add dish to the dish list in the menu
         public void addDish(Dish d)
         {
             _dishes.Add(d);
         }
 
-        //This function can delect dish to the dish list in the menu
         public void deleteDish(int num)
         {
             _dishes.RemoveAt(num - 1);
         }
 
-        //This function can display the menu 
         public void DisplayDish()
         {
             Console.WriteLine("      *****" + Name + "*****");

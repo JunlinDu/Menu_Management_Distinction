@@ -6,9 +6,6 @@ using System.Threading.Tasks;
 
 namespace MenuManagement
 {
-    //<summary>
-    // An enum stores all the authentication Result.
-    // </summary>
     public enum AuthenticationResult
     {
         nameNPasswordCorrect,

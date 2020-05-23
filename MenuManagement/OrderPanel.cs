@@ -5,13 +5,6 @@ using MenuProject;
 
 namespace MenuManagement
 {
-    //<summary>
-    // This is the overall order panel systm.
-    // Menus can be loaded from text and display on the system.
-    // Customers can choose the menus they want.
-    // Customers can order food here.
-    // Orders are being processed here.
-    // </summary>
     public class OrderPanel
     {
         private List<Menu> _menuList;
@@ -29,8 +22,6 @@ namespace MenuManagement
         {
             get { return _orderList; }
         }
-        
-        // This function is used to save the orrder to the text file.
         private void SaveOrder()
         {
             StreamWriter writer = new StreamWriter("order_histroy.txt");
@@ -43,7 +34,6 @@ namespace MenuManagement
             writer.WriteLine("Daily Total: " + _dailySaleTotal);
         }
 
-        // This function is used to load the menu and dishes in it form text file.
         public void Load(String fileName)
         {
             StreamReader reader = new StreamReader(fileName);
@@ -69,7 +59,6 @@ namespace MenuManagement
             }
         }
 
-        //This funciton is reading dishes from its ID
         private String[] ReadId(StreamReader reader)
         {
             int idCount = reader.ReadInteger();
@@ -81,7 +70,6 @@ namespace MenuManagement
             return ids;
         }
 
-        //This funciton is used to calculate the total price
         public double calculatePrice()
         {
             double _price = 0.0;
@@ -92,7 +80,6 @@ namespace MenuManagement
             return _price;
         }
 
-        //This funciton is used to display the order the customer has placed.
         public void displayOrder()
         {
             Console.WriteLine("****The List Below Shows Dishes That You Have Ordered****");
@@ -103,7 +90,6 @@ namespace MenuManagement
             Console.WriteLine("Total: " + calculatePrice().ToString());
         }
 
-        // This function is used to display the menu in the order panel.
         public void displayMenu()
         {
             for (int i = 0; i < _menuList.Count; i++)
@@ -112,7 +98,6 @@ namespace MenuManagement
             }
         }
 
-        // This function is used to process and finalize the order
         public void FinalizeOrder()
         {
             _dailySaleTotal += calculatePrice();
@@ -120,13 +105,12 @@ namespace MenuManagement
             SaveOrder();
             _orderList.Clear();
         }
-        // This function is used to choose the menu from all menu listed
+
         public Menu ChooseMenu(int choice)
         {
             return _menuList[(choice - 1)];
         }
 
-        // This function is used to add dish to the order.
         public String addDishToOrder(Menu menu, int i)
         {
             if (i <= menu.Dishes.Count)
@@ -138,7 +122,6 @@ namespace MenuManagement
             return "*********Please Re-Enter*********";
         }
 
-        // This function is used to delect dish to the order.
         public String deleteDishFromOrder(int i)
         {
             if (i <= _orderList.Count)
