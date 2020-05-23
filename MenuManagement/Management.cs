@@ -5,50 +5,86 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.IO;
 using System.Security.Cryptography;
-using MenuManagement;
+using MenuProject;
 
-namespace MenuSystem
+
+namespace MenuManagement
 {
     public class Management
-    {/*
+    {
         private List<Menu> _menus;
+        private bool _menuLoaded;
         //use for store user input (temporary),[o] strore id, [1] store name
         //private string[] _tempInfo = new string [2];
 
         public Management()
         {
             _menus = new List<Menu>();
-
+            _menuLoaded = false;
         }
 
 
-        //Display all menu
+        //Display menu
         public void Display()
         {
             loadMenu();
             foreach (Menu m in _menus)
             {
-                Console.WriteLine("Name:" + m.Name + " ID:" + m.Id[0]);
+                Console.WriteLine("Name:" + m.Name + " ID:" + m.Identifiers);
             }
         }
+
+        //create file for this menu
+        public void SaveNewMenu(string name, string id)
+        {
+            //Create new menu(as a file) in current path
+            string fileNameId = name + "id " + id;
+            string path = Path.GetTempPath();
+            path = Path.Combine(path, fileNameId);
+        }
+
+
+        //Save any new changes to txt file (cover orginal file)
+        public void SaveDishChanges(Menu m, string whichMenu)
+        {
+            string path = Path.GetTempPath();
+            using (StreamWriter w = File.AppendText((whichMenu + ".txt")))
+            {
+                foreach (Menu thisM in _menus)
+                {
+                    w.WriteLine(thisM.Dishes);
+                }
+                w.Close();
+            }
+
+        }
+
 
         //load menus from txt file and save into _menu list
         public void loadMenu()
         {
-            //current directory
-            DirectoryInfo dinfo = new DirectoryInfo(@"C:\Users\mintm\Documents\C#\Development Project\Menu Storage\Menu Storage");
 
-            //Get MenusList txt files (menus) from current directory
-            FileInfo[] Files = dinfo.GetFiles("MenusList.txt");
+            //Get all menue file from current directory
+            FileInfo[] Files = currendinfo.GetFiles("* Menu.txt");
 
-            using (StreamReader sr = File.OpenText(@"C:\Users\mintm\Documents\C#\Development Project\Menu Storage\Menu Storage"))
+
+            //Need to be fixed ( should read dish information from each menu and store into _menus fields.
+            foreach (Files f in FileInfor)
             {
-                string s;
-                while ((s = sr.ReadLine()) != null)
+                using (StreamReader sr = File.OpenText(Path.Combine(Directory.GetCurrentDirectory(), f)))
                 {
-                    Console.WriteLine(s);
+                    string s;
+                    while ((s = sr.ReadLine()) != null)
+                    {
+                        Console.WriteLine(s);
+                    }
                 }
+
             }
+            Console.WriteLine("Menu loaded.");
+
+            _menuLoaded = true;
+
         }
 
 
@@ -86,7 +122,7 @@ namespace MenuSystem
                 {
                     Menu tempMenu = new Menu(thisId, thisName);
                     addMenu(tempMenu);
-                    SaveChanges();
+                    SaveNewMenu(thisName, thisId[0]);
                     finish = true;
                     Console.WriteLine("New menu created.");
                 }
@@ -106,50 +142,26 @@ namespace MenuSystem
 
         }
 
-        //Save any new changes to txt file (cover orginal file)
-        public void SaveChanges()
-        {
-            string path = Path.GetTempPath();
-            using (StreamWriter w = File.AppendText(("MenusList.txt")))
-            {
-                foreach (Menu m in _menus)
-                {
-                    w.WriteLine(m);
-                }
-                w.Close();
-            }
 
-        }
-
-
-        //TextWriter tw = new StreamWriter("Menus.txt");
 
         //Delete Menu from list
-        public void deleteMenu()
+        public void deleteMenu(string name)
         {
-            //load all menus from txt file and display them on console.
-            loadMenu();
+            //Determine if menus have been import to _menus field, if not, import them.
+            if (_menuLoaded == false)
+            {
+                loadMenu();
+            }
+            //display them on console.
             Display();
 
-            string decide;
-            Console.WriteLine("Which menu you want to delete?");
-            decide = Console.ReadLine().ToLower();
+            /*string decide;
+            Console.WriteLine("Please enter menu name");
+            decide = Console.ReadLine().ToLower();*/
 
-            foreach (Menu m in _menus)
-            {
-                if (decide == m)
-                {
-                    Console.WriteLine("Delete " + m.Name + " ?");
-                    _menus.Remove(m);
-                    SaveChanges();
-                }
-                else
-                {
-                    Console.WriteLine("The menu you trying to find does not exist.");
-                }
+            //Delete the file
+            File.Delete(name + ".txt");
 
-            }
-
-        }*/
+        }
     }
 }
