@@ -10,3 +10,9 @@ C:\Users\junlindu\Desktop\Menu_Management_Distinction\MenuManagement\obj\Debug\M
 C:\Users\junlindu\Desktop\Menu_Management_Distinction\MenuManagement\bin\Debug\MenuManagement.exe
 C:\Users\junlindu\Desktop\Menu_Management_Distinction\MenuManagement\bin\Debug\MenuManagement.pdb
 C:\Users\junlindu\Desktop\Menu_Management_Distinction\MenuManagement\obj\Debug\MenuManagement.csprojAssemblyReference.cache
+C:\Users\102409230\Documents\Menu_Management_Distinction\MenuManagement\bin\Debug\MenuManagement.exe
+C:\Users\102409230\Documents\Menu_Management_Distinction\MenuManagement\bin\Debug\MenuManagement.pdb
+C:\Users\102409230\Documents\Menu_Management_Distinction\MenuManagement\obj\Debug\MenuManagement.csprojAssemblyReference.cache
+C:\Users\102409230\Documents\Menu_Management_Distinction\MenuManagement\obj\Debug\MenuManagement.csproj.CoreCompileInputs.cache
+C:\Users\102409230\Documents\Menu_Management_Distinction\MenuManagement\obj\Debug\MenuManagement.exe
+C:\Users\102409230\Documents\Menu_Management_Distinction\MenuManagement\obj\Debug\MenuManagement.pdb

@@ -10,7 +10,7 @@ namespace MenuManagement
         private String _name;
         public IdentifiableEntities(String[] Identifiers, String name)
         {
-            name = nameLength(name);
+            _name = nameLength(name);
             identifiers = new List<String>();
 
             foreach (String s in Identifiers)
