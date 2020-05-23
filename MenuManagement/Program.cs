@@ -30,9 +30,30 @@ namespace MenuManagement
                         var result = Authentication.Identify(input, inputTwo);
                         if(result == AuthenticationResult.nameNPasswordCorrect)
                         {
-                            Console.WriteLine("Welcome!");
-                            Console.WriteLine("Manager Functions need to be added..");
-                            //Manager Functions need to be added
+                            Console.WriteLine("Welcome!\n\n\n");
+                            Management management = new Management();
+                            Console.WriteLine("Below is the list of Menu: \n\n\n");
+                            management.loadMenu("menu_list.txt");
+                            management.displayMenu();
+
+                            Console.WriteLine("\n\n\n");
+                            do
+                            {
+                                Console.WriteLine("1. Add new Menu");
+                                Console.Write("Your Choice -> ");
+                                input = Console.ReadLine();
+                                switch (input)
+                                {
+                                    case "1":
+                                        management.CreateMenu("menu_list.txt");
+                                        break;
+                                    case "q":
+                                        break;
+                                    default:
+                                        Console.WriteLine("Invalid Input!\n\n\n");
+                                        break;
+                                }
+                            } while (!input.Equals("q"));
                         }
                         else if(result == AuthenticationResult.passwordIncorrect)
                         {

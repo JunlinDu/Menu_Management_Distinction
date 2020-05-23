@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+
 namespace MenuManagement
 {
     public class Menu : IdentifiableEntities
@@ -17,7 +19,16 @@ namespace MenuManagement
             _dishes = new List<Dish>();
         }
 
-        
+        public void Write(StreamWriter writer)
+        {
+            writer.WriteLine(this.Identifiers.Count);
+            writer.WriteLine(_dishes.Count);
+            foreach(Dish dish in _dishes)
+            {
+                dish.Write(writer);
+            }
+        }
+
         public List<Dish> Dishes
         {
             get { return _dishes; }

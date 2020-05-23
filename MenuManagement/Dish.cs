@@ -24,10 +24,25 @@ namespace MenuManagement
             _price = priceRange(price);
         }
 
+        public void Write(StreamWriter writer)
+        {
+            writer.WriteLine(this.Identifiers.Count.ToString());
+            for(int i = 0; i <this.Identifiers.Count; i++)
+            {
+                writer.WriteLine(this.Identifiers[i].ToString());
+            }
+            writer.WriteLine(this.Name);
+            writer.WriteLine(this.Description);
+            writer.WriteLine(this.Price);
+        }
+
         // This function can load dishes from a text file.
         public Dish Load(StreamReader reader, String[] ids)
         {
-            Identifiers = ids;
+            for (int i = 0; i< ids.Length; i++)
+            {
+                Identifiers.Add(ids[i]);
+            }
             Name = reader.ReadLine();
             Description = reader.ReadLine();
             Price = reader.ReadSingle();

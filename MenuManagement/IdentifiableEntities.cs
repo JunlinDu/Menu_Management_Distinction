@@ -43,7 +43,10 @@ namespace MenuManagement
         }
 
         //Name of the object.
-        public String[] Identifiers{get;set;}
+        public List<String> Identifiers
+        {
+            get { return identifiers;}
+        }
 
         public String Name
         { 
