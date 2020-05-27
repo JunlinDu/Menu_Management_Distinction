@@ -232,6 +232,26 @@ namespace MenuManagement
                 menu.Write(writer);
             }
         }
+        //Delete Menu from list
+
+        public void deleteMenu(string name)
+        {
+            //Determine if menus have been import to _menus field, if not, import them.
+            if (_menuLoaded == false)
+            {
+                //loadMenu();
+            }
+            //display them on console.
+            Display();
+
+            /*string decide;
+            Console.WriteLine("Please enter menu name");
+            decide = Console.ReadLine().ToLower();*/
+
+            //Delete the file
+            File.Delete(name + ".txt");
+
+        }
 
     }
 }
